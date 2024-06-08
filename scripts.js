@@ -4,7 +4,16 @@ const list = document.querySelector('ul')
 const cliquei = document.querySelector('.press')
 const buttonMap = document.querySelector('.press-map')
 const somaValue = document.querySelector('.soma-valor')
+const filtrartudo = document.querySelector('.filtrar')
 
+function formatCurrency (value){
+    const newValue = value.toLocaleString('pt-br', {
+        style: 'currency',
+        currency: 'BRL',
+    })
+
+    return newValue
+}
 
 function aoClicar(productsArray) {
 
@@ -19,7 +28,8 @@ function aoClicar(productsArray) {
 
             <img src=${product.src}>
             <p> ${product.name}</p>
-            <p class="item-price"> R$ ${product.price} </p>
+function formatCurrency(value){
+            <p class="item-price"> R$ ${formatCurrency (product.price)} </p>
 
         </li>
          `
@@ -43,12 +53,20 @@ function somaTudo() {
 
     list.innerHTML = `
          <li>
-            <p> O valor total dos itens é : R$ ${totalValue} </p>
+            <p> O valor total dos itens é : R$ ${formatCurrency (totalValue)} </p>
         </li>
          `
+}
+
+function filterAll() {
+
+    const filterJustVegan = menuOptions.filter((product) => product.vegan)
+
+    aoClicar(filterJustVegan)
 }
 
 
 buttonMap.addEventListener('click', aoMapear)
 cliquei.addEventListener('click', () => aoClicar(menuOptions))
 somaValue.addEventListener('click', somaTudo)
+filtrartudo.addEventListener('click', filterAll) 
